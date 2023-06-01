@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
+#define ONE_SECOND 1000
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char *argv[]) 
+{
+	srand(time(NULL));
+	//int random = rand()%9;
+	int play,start,mot,bob,e,num = 5,nega,S;
+	 
+	printf("----------------------------\n");
+	printf("        발표자 뽑기\n\n");
+	printf("뽑기를 시작하겠습니까? <예 = 1,아니오 = 2>\n");
+	scanf("%d",&start); 
+	
+	if(start == 1)
+	{
+		printf("효과를 추가하겠습니꽈? <예 = 1, 아니오 = 2>\n");
+		scanf("%d",&mot);
+		
+		while(1) {
+			printf("몇번 출력하시겠습니까?(최대 50번): ");
+			scanf("%d",&nega);
+			if(nega<51)
+				break;
+		}
+		
+		if(mot == 1)
+		{
+			printf("숫자 범위를 적어주세요: ");
+			scanf("%d",&play);
+			for (e = 0; e < 5; e++)
+			{
+				Sleep(ONE_SECOND);
+				printf("%d",num);
+				printf("\n");
+				num = num - 1;
+			}
+				printf("나온 번호는....");
+				Sleep(ONE_SECOND);
+				printf("\n");
+				for(S = 0; S < nega; S++)
+				{
+					bob = rand() %play;
+					
+					printf("%d번 ",bob);	
+				} 
+			
+							
+		}
+		else if(mot == 2)
+		{
+			printf("숫자 범위를 적어주세요");
+			scanf("%d",&play);
+			bob = rand() %play;
+			for(S = 0; S < nega; S++)
+			{
+				bob = rand() %play;
+				printf("%d번 ",bob);	
+			} 
+		} 
+	
+	} 
+	else if(start != 1) 
+	{
+		printf("그럼 끄지세요");
+	}
+
+	 
+	return 0;
+}
