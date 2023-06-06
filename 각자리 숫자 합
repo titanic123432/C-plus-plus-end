@@ -1,0 +1,24 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int num;
+	int o;
+	int tw;
+	int tr;
+	int f;
+	int g;
+	scanf("%d",&num);
+	o = num / 1000;
+	num %= 1000;	
+	tw = num / 100;
+	num %= 100;	
+	tr = num / 10;
+	num %= 10;	
+	f = num / 1;
+	num %= 1;	
+	g = o + tw + tr + f;
+	printf("%d",g);
+}
