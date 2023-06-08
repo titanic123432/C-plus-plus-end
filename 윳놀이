@@ -1,0 +1,77 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int a,n1,n2,n3,n4,sum1,sum2,sum3;
+	scanf("%d %d %d %d",&n1, &n2, &n3, &n4);
+	sum1 = n1 + n2 + n3 + n4;
+	scanf("%d %d %d %d",&n1, &n2, &n3, &n4);
+	sum2= n1 + n2 + n3 + n4;	
+	scanf("%d %d %d %d",&n1, &n2, &n3, &n4);
+	sum3 = n1 + n2 + n3 + n4;
+	if(sum1 == 3)
+	{
+		printf("A\n");
+	}
+	else if(sum1 == 2)
+	{
+		printf("B\n");
+	}
+	else if(sum1 == 1)
+	{
+		printf("C\n");
+	}
+	else if(sum1 == 0)
+	{
+		printf("D\n");
+	}
+	else if(sum1 == 4)
+	{
+		printf("E\n");
+	}
+	//------------------
+	if(sum2 == 3)
+	{
+		printf("A\n");
+	}
+	else if(sum2 == 2)
+	{
+		printf("B\n");
+	}
+	else if(sum2 == 1)
+	{
+		printf("C\n");
+	}
+	else if(sum2== 0)
+	{
+		printf("D\n");
+	}
+	else if(sum2 == 4)
+	{
+		printf("E\n");
+	}
+	//------------
+	if(sum3 == 3)
+	{
+		printf("A\n");
+	}
+	else if(sum3 == 2)
+	{
+		printf("B\n");
+	}
+	else if(sum3 == 1)
+	{
+		printf("C\n");
+	}
+	else if(sum3 == 0)
+	{
+		printf("D\n");
+	}
+	else if(sum3 == 4)
+	{
+		printf("E\n");
+	}								
+	return 0; 
+}
