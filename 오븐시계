@@ -1,0 +1,28 @@
+#include <iostream>
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+
+	int H,M,after;
+
+	scanf("%d %d",&H,&M);
+	scanf("%d",&after);
+	M = M + after;
+	if (M >= 60)
+	{
+		H = H + 1;
+		M = M - 60;
+		if(H >= 24)
+		{
+			H = H - 24;
+		}
+		if(M >= 60)
+		{
+			H = H + 1;
+			M = M - 60;
+		}
+	}
+	printf("%d %d",H,M);
+	return 0;
+}
