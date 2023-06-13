@@ -1,0 +1,28 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int st,z,G,s;
+	scanf("%d",&st);
+	for(s = 0; s < st; s++)
+	{
+		scanf("%d",&z);
+		G = G + z;
+	}
+	G = G / st;
+	if(G >= 80)
+	{
+		printf("easy");
+	}
+	if(G >= 60 && G < 80)
+	{
+		printf("normal");
+	}
+	if(G >= 0 && G < 59)
+	{
+		printf("hard");
+	}
+	return 0;
+}
