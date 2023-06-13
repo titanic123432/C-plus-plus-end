@@ -1,0 +1,23 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int M,Ai[10],Bi,p,e=0;
+	scanf("%d",&M);
+	for(p = 0; p < M; p++)
+	{
+		scanf("%d",&Ai[p]);
+	}
+	for(p = 0; p < M; p++)
+	{
+		scanf("%d",&Bi);
+		if(Ai[p] == Bi)
+		{
+			e = e + 1;
+		}
+	}
+	printf("%d",e);
+	return 0;
+}
