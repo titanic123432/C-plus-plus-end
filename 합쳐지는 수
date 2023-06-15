@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+ 
+int main(int argc, char** argv) 
+{
+	int num,time,set,num2;
+	scanf("%d",&num);
+	time = 0;
+	while(num >= 10)
+	{ 
+		set = 0;
+		while(num)
+		{
+			set = set + (num % 10);
+			num /= 10;
+		}
+		num = set;
+		time = time + 1;
+	}
+	printf("%d",time);
+	return 0; 
+}
