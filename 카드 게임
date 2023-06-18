@@ -1,0 +1,32 @@
+	int A[10],B[10],e,game,A1,B1;
+	for(e = 0; e < 10; e++)
+	{
+		scanf("%d",&A[e]);
+	}
+	for(e = 0; e < 10; e++)
+	{
+		scanf("%d",&B[e]);
+	}
+	for(game = 0; game < 10; game++)
+	{
+		if(A[game] > B[game])
+		{
+			A1++;
+		}
+		if(B[game] < B[game])
+		{
+			B1++;
+		}
+	}
+	if(A1 > B1)
+	{
+		printf("A");
+	}
+	if(A1 < B1)
+	{
+		printf("B");
+	}
+	if(A1 == B1)
+	{
+		printf("D");
+	}		
