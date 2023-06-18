@@ -1,0 +1,25 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int N,M,i,j,num = 0;
+	scanf("%d %d",&N,&M);
+	for(i = N; i <= M; i++)
+	{
+		for(j = 2; j * j <= i; j++)
+		{
+			if(i % j == 0)
+			{
+				break;
+			}
+		} 
+		if(j * j > i)
+		{
+			num = num + 1;
+		}	
+	}
+	printf("%d",num);
+	return 0;
+}
