@@ -1,0 +1,19 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int in,out,num = 0,ken = 0;
+	for(int i = 0; i < 4; i++)
+	{
+		scanf("%d %d",&in, &out);
+		num - num - out + in;
+		if(ken > num)
+		{
+			num = ken;
+		}
+	}
+	printf("%d",num);
+	return 0;
+}
