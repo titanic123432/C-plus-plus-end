@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std; 
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 	
+{	
+	int sim,Ai[10000],i,max,mun,num,fin,s;
+	scanf("%d",&sim);
+	for(s = 0; s < sim; s++)
+	{
+		scanf("%d",&Ai[s]);
+	}
+	for(num = 0; num < sim; num++)
+	{	
+		if(max < Ai[num])
+		{
+			max = Ai[num];
+		}
+		if(mun > Ai[num])
+		{
+			mun = Ai[num];
+		}
+		fin = fin + Ai[num];
+	}
+	printf("%d", (fin - max - mun) / (sim - 2));
+	return 0;
+}
