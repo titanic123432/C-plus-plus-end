@@ -1,0 +1,29 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int N,Si[1000],rank[1000];
+	scanf("%d",&N);
+	for(int i = 0; i < N; i++)
+	{
+		scanf("%d",&Si[i]);
+	}
+	for(int i = 0; i < N; i++)
+	{
+		rank[i] = 1;
+		for(int e = 0; e < N; e++)
+		{
+			if(Si[i] < Si[e])
+			{
+				rank[i]++;
+			}
+		}
+	}
+	for(int i = 0; i < N; i++)
+	{
+		printf("%d\n",rank[i]);
+	}
+	return 0;
+}
