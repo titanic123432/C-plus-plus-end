@@ -1,0 +1,25 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int level,Si[1000],r;
+	scanf("%d",&level);
+	for(r = 0; r < lever; r++)
+	{
+		scanf("%d",&Si);
+	}
+	int sus
+	for(r = level - 2; r>= 0; r--)
+	{
+		if (S[r + 1] <= S[i])
+		{
+			int num = Si[i] - Si[i + 1] + 1;
+			sus += num;
+			Si[i] = S[i] - diff; 
+		}
+	}
+	printf("%d",sus);
+	return 0;
+}
