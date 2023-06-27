@@ -1,0 +1,51 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int A[10],B[10];
+	for(int i = 0; i < 10; i++)
+	{
+		scanf("%d",&A[i]);
+	}
+	for(int i = 0; i < 10; i++)
+	{
+		scanf("%d",&B[i]);
+	}	
+	int win = 0;
+	int Aw,Bw;
+	for(int i = 0; i < 10; i++)
+	{
+		if(A[i] > B[i])
+		{
+			Aw += 3;
+			win = 0;
+		}
+		if(B[i] > A[i])
+		{
+			Bw += 3;
+			win = 1;
+		}
+		if(A[i] == B[i])
+		{
+			Aw += 1;
+			Bw += 1;
+			win = 2;
+		}				
+	}
+	printf("%d %d\n",Aw,Bw);
+	if(win == 0)
+	{
+		printf("A");
+	}
+	if(win == 1)
+	{
+		printf("B");
+	}
+	if(win == 2)
+	{
+		printf("D");
+	}		
+	return 0;
+}
