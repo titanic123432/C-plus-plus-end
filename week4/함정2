@@ -1,0 +1,36 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int map[1100][1100] = {0,};
+	int n,t,k;
+	scanf("%d",&n);
+	scanf("%d %d",&t, &k);
+	for(int i = 0; i < t; i++)
+	{
+		int tx, ty;
+		scanf("%d %d",&tx,&ty);
+		map[ty][tx] = 1
+	}
+	int check = 0;
+	for (int i = 1; i <= k; i++)
+	{
+		int kx, ky;
+		scanf("%d %d",&kx, &ky);
+		if(map[ky][kx] && !check)
+		{
+			cbeck = i;
+		}
+	}
+	if(check)
+	{
+		printf("%d",check);
+	}
+	else
+	{
+		printf("-1");
+	}
+	return 0;
+}
