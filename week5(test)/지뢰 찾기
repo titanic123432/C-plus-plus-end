@@ -1,0 +1,58 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int map[102][102];
+	int lf,rt,z;
+	scanf("%d %d",&lf, &rt);
+	scanf("%d",&z);
+	for(int i  = 0; i < z; i++)
+	{
+		int x,y;
+		scanf("%d %d",&x, &y);
+		map[y][x];
+		if(map[y][x - 1] != -1)
+		{
+			map[y][x - 1] += 1;
+		}
+		if(map[y][x + 1] != -1)
+		{
+			map[y][x + 1] += 1;
+		}
+		if(map[y - 1][x] != -1)
+		{
+			map[y - 1][x] += 1;
+		}
+		if(map[y + 1][x] != -1)
+		{
+			map[y + 1][x] += 1;
+		}
+		if(map[y - 1][x - 1] != -1)
+		{
+			map[y - 1][x - 1] += 1;
+		}
+		if(map[y - 1][x + 1] != -1)
+		{
+			map[y - 1][x + 1] += 1;
+		}
+		if(map[y + 1][x - 1] != -1)
+		{
+			map[y + 1][x - 1] += 1;
+		}
+		if(map[y + 1][x + 1] != -1)
+		{
+			map[y + 1][x + 1] += 1;
+		}						
+	}
+	for(int i = 1; i <= lf; i++)
+	{
+		for(int j = 0; j <= rt; j++)
+		{
+			printf("%d ",map[i][j]);
+		}
+		printf("\n");	
+	}	
+	return 0;
+}
