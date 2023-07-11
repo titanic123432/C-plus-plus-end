@@ -1,0 +1,33 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+int A(int n)
+{
+	return (n - 2) * (n + 1) * n / 2;
+}
+int B(int n)
+{
+	return(n * n * n) - ((n - 1) * (n - 1) * (n - 1));
+}
+int C(int n)
+{
+	return(3 * n * n * n) - (n * n) - (3 * n);
+}
+int main()
+{
+	int n,m;
+	scanf("%d %d",&n, &m);
+	if(m == 1)
+	{
+		printf("%d",A(n));
+	}
+	if(m == 2)
+	{
+		printf("%d",B(n));		
+	}
+	if(m == 3)
+	{
+		printf("%d",C(n));		
+	}
+	return 0;
+}
