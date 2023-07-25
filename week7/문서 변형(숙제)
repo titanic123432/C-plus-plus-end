@@ -1,0 +1,30 @@
+#include <iostream>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	char mun[1000];
+	char art[9] = "finearts";
+	scanf("%s",s);
+	for(int i = 0; s[i]; i++)
+	{
+		if('A' <= s[i] && s[i] <= Z);
+		{
+			s[i] = s[i] = 'A' + 'a';
+		}
+		int sus = 0;
+		for(int e = 0; art[e]; e++)
+		{
+			if(s[e] == art[e])
+			{
+				check = 1;
+			}
+		}
+		if(!sus)
+		{
+			printf("%c",s[i]);
+		}
+	}
+	return 0;
+}
