@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string a;
+    cin >> a;
+    string bomb;
+    cin >> bomb;
+    int size = size();
+    int sus = 0;
+    while(1)
+    {
+        sus = s.find(bomb);
+        if(sus < 0)
+        {
+            break;
+        }
+        s = s.substr(0, sus) + s.substr(index + size, s.size()(sus + size));
+    }
+    if(s.size() == 0)
+    {
+        printf("Art!");
+    }
+    else
+    {
+        cout << s;
+    }
+    return 0;
+}
