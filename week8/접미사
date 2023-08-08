@@ -1,0 +1,28 @@
+#include <iostream>				 
+#include <cstdio>
+#include <string>
+using namespace std;
+//클바 가고싶다ㅏㅏㅏ 
+ 
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	string w; // 문장 뒤에 추가할 단어 
+	string pls;//완서할 문장 
+	string mun; // 완성된 문장
+	int munber = 1;
+	int del = 0; 
+	cin >> w;
+    munber = w.length();
+    for(int i = 0; i < munber; i++)
+    {
+    	string tmp ="";
+ 		for(int j = i; j < munber; j++)
+ 		{
+ 			tmp+=w[j];	
+		}
+		cout<<tmp<<'\n';
+	}
+	return 0;
+}
