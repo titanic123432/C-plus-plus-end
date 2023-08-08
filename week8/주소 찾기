@@ -1,0 +1,25 @@
+#include <iostream>				 
+#include <cstdio>
+#include <string>
+using namespace std;
+//클바 가고싶다ㅏㅏㅏ 
+ 
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	string  mincheoltlqkf;
+	cin >>  mincheoltlqkf;
+	string wich;
+	cin >> wich;
+	int count = 0;
+	for(int i = 0; i <= mincheoltlqkf.size() - wich.size(); i++)
+	{
+		if(mincheoltlqkf.substr(i, wich.size()) == wich)
+		{
+			count++;
+		}
+	} 
+	printf("%d",count);
+	return 0;
+}
