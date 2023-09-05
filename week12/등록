@@ -1,0 +1,23 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	int t[1001];
+	int end = 0;
+	int n;	
+	scanf("%d",&n);
+	for(int i = 1; i < n; i++)
+	{
+		scanf("%d",&t[i]);
+	}
+	sort(t + 1,t + n + 1);
+	for(int i = 1; i <= n; i++)
+	{
+		end += t[i] * (n - i);
+	}
+	printf("%d",end);
+	return 0;
+}
