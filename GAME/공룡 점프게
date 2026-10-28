@@ -1,0 +1,380 @@
+
+import pygame
+import random
+import sys
+
+pygame.init()
+
+# ==============================
+# 1. 화면 설정
+# ==============================
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+WIDTH, HEIGHT = screen.get_size()
+
+pygame.display.set_caption("공룡 점프 게임")
+clock = pygame.time.Clock()
+
+font = pygame.font.SysFont(None, 36)
+big_font = pygame.font.SysFont(None, 60)
+
+# ==============================
+# 2. 색상 및 바닥
+# ==============================
+WHITE = (255, 255, 255)
+BLACK = (30, 30, 30)
+GREEN = (50, 180, 70)
+SKY = (230, 245, 255)
+GRAY = (130, 130, 130)
+RED = (220, 60, 60)
+
+GROUND_Y = int(HEIGHT * 0.55)
+
+# ==============================
+# 3. 플레이어 설정
+# ==============================
+PLAYER_WIDTH = 45
+PLAYER_HEIGHT = 55
+
+player = pygame.Rect(
+    100,
+    GROUND_Y - PLAYER_HEIGHT,
+    PLAYER_WIDTH,
+    PLAYER_HEIGHT
+)
+
+gravity = 0.8
+jump_power = -11
+max_jump_speed = -18
+jump_boost = 0.45
+
+player_y_speed = 0
+on_ground = True
+
+# ==============================
+# 4. 장애물 설정
+# ==============================
+obstacles = []
+
+# 초반 장애물 생성 간격
+BASE_MIN_SPAWN = 45
+BASE_MAX_SPAWN = 75
+
+MIN_SPAWN = BASE_MIN_SPAWN
+MAX_SPAWN = BASE_MAX_SPAWN
+
+spawn_timer = 0
+next_spawn = random.randint(MIN_SPAWN, MAX_SPAWN)
+
+# ==============================
+# 5. 게임 변수
+# ==============================
+score = 0
+best_score = 0
+
+speed = 6
+BASE_SPEED = 6
+MAX_SPEED = 15
+
+difficulty_level = 0
+game_start_time = pygame.time.get_ticks()
+
+game_over = False
+running = True
+
+
+# ==============================
+# 6. 게임 초기화
+# ==============================
+def reset_game():
+    global player_y_speed, on_ground
+    global spawn_timer, next_spawn
+    global score, speed, game_over
+    global MIN_SPAWN, MAX_SPAWN
+    global difficulty_level, game_start_time
+
+    player.x = 100
+    player.y = GROUND_Y - PLAYER_HEIGHT
+
+    player_y_speed = 0
+    on_ground = True
+
+    obstacles.clear()
+
+    spawn_timer = 0
+
+    MIN_SPAWN = BASE_MIN_SPAWN
+    MAX_SPAWN = BASE_MAX_SPAWN
+
+    next_spawn = random.randint(MIN_SPAWN, MAX_SPAWN)
+
+    score = 0
+    speed = BASE_SPEED
+    difficulty_level = 0
+
+    game_start_time = pygame.time.get_ticks()
+    game_over = False
+
+
+# ==============================
+# 7. 메인 게임 루프
+# ==============================
+while running:
+
+    clock.tick(60)
+
+    # ------------------------------
+    # 키보드 이벤트
+    # ------------------------------
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            running = False
+
+        if event.type == pygame.KEYDOWN:
+
+            # ESC: 게임 종료
+            if event.key == pygame.K_ESCAPE:
+                running = False
+
+            # SPACE: 점프 또는 재시작
+            elif event.key == pygame.K_SPACE:
+
+                if game_over:
+                    reset_game()
+
+                elif on_ground:
+                    player_y_speed = jump_power
+                    on_ground = False
+
+    if not running:
+        break
+
+    # ==============================
+    # 8. 난이도 시스템
+    # ==============================
+    if not game_over:
+
+        elapsed_time = (
+            pygame.time.get_ticks() - game_start_time
+        ) / 1000
+
+        # 10초마다 난이도 상승
+        difficulty_level = int(elapsed_time // 10)
+
+        # 시간이 지날수록 속도 증가
+        speed = min(
+            MAX_SPEED,
+            BASE_SPEED + difficulty_level
+        )
+
+        # 시간이 지날수록 장애물이 더 자주 등장
+        MIN_SPAWN = max(
+            18,
+            BASE_MIN_SPAWN - difficulty_level * 3
+        )
+
+        MAX_SPAWN = max(
+            28,
+            BASE_MAX_SPAWN - difficulty_level * 4
+        )
+
+        # ==============================
+        # 9. 점프 물리
+        # ==============================
+        keys = pygame.key.get_pressed()
+        space_held = keys[pygame.K_SPACE]
+
+        # 상승 중 스페이스바를 오래 누르면 더 높이 점프
+        if space_held and player_y_speed < 0:
+            player_y_speed = max(
+                max_jump_speed,
+                player_y_speed - jump_boost
+            )
+            
+
+        # 중력 적용
+        player_y_speed += gravity
+        player.y += round(player_y_speed)
+
+        # 바닥 충돌
+        if player.y >= GROUND_Y - PLAYER_HEIGHT:
+            player.y = GROUND_Y - PLAYER_HEIGHT
+            player_y_speed = 0
+            on_ground = True
+
+        # ==============================
+        # 10. 장애물 생성
+        # ==============================
+        spawn_timer += 1
+
+        if spawn_timer >= next_spawn:
+
+            obstacle_width = random.randint(20, 35)
+            obstacle_height = random.randint(30, 50)
+
+            obstacle = pygame.Rect(
+                WIDTH,
+                GROUND_Y - obstacle_height,
+                obstacle_width,
+                obstacle_height
+            )
+
+            obstacles.append(obstacle)
+
+            spawn_timer = 0
+
+            # 난이도에 맞는 다음 등장 간격
+            next_spawn = random.randint(
+                MIN_SPAWN,
+                MAX_SPAWN
+            )
+
+        # ==============================
+        # 11. 장애물 이동 및 충돌
+        # ==============================
+        for obstacle in obstacles[:]:
+
+            obstacle.x -= speed
+
+            # 충돌 검사
+            if player.colliderect(obstacle):
+                game_over = True
+                best_score = max(best_score, score)
+
+            # 화면 밖 장애물 제거
+            if obstacle.right < 0:
+                obstacles.remove(obstacle)
+                score += 1
+
+    # ==============================
+    # 12. 화면 그리기
+    # ==============================
+    screen.fill(SKY)
+
+    # 바닥
+    pygame.draw.line(
+        screen,
+        BLACK,
+        (0, GROUND_Y),
+        (WIDTH, GROUND_Y),
+        3
+    )
+
+    # 플레이어
+    pygame.draw.rect(
+        screen,
+        GREEN,
+        player,
+        border_radius=6
+    )
+
+    # 장애물
+    for obstacle in obstacles:
+        pygame.draw.rect(
+            screen,
+            BLACK,
+            obstacle,
+            border_radius=3
+        )
+
+    # 점수
+    score_text = font.render(
+        f"Score: {score}",
+        True,
+        BLACK
+    )
+
+    best_text = font.render(
+        f"Best: {max(best_score, score)}",
+        True,
+        GRAY
+    )
+
+    screen.blit(score_text, (WIDTH - 200, 25))
+    screen.blit(best_text, (WIDTH - 200, 65))
+
+    # 조작 안내
+    control_text = font.render(
+        "SPACE: Jump    ESC: Quit",
+        True,
+        BLACK
+    )
+    screen.blit(control_text, (30, 25))
+
+    # 난이도 표시
+    level_text = font.render(
+        f"Level: {difficulty_level + 1}",
+        True,
+        RED
+    )
+    screen.blit(level_text, (30, 65))
+
+    # ==============================
+    # 13. 게임 오버 화면
+    # ==============================
+    if game_over:
+
+        overlay = pygame.Surface((WIDTH, HEIGHT))
+        overlay.set_alpha(190)
+        overlay.fill(WHITE)
+        screen.blit(overlay, (0, 0))
+
+        title = big_font.render(
+            "GAME OVER",
+            True,
+            BLACK
+        )
+
+        final_score = font.render(
+            f"Score: {score}",
+            True,
+            BLACK
+        )
+
+        restart_text = font.render(
+            "SPACE: Restart",
+            True,
+            BLACK
+        )
+
+        quit_text = font.render(
+            "ESC: Quit",
+            True,
+            BLACK
+        )
+
+        screen.blit(
+            title,
+            title.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 - 80)
+            )
+        )
+
+        screen.blit(
+            final_score,
+            final_score.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 - 20)
+            )
+        )
+
+        screen.blit(
+            restart_text,
+            restart_text.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 + 35)
+            )
+        )
+
+        screen.blit(
+            quit_text,
+            quit_text.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 + 80)
+            )
+        )
+
+    pygame.display.flip()
+
+# ==============================
+# 14. 게임 종료
+# ==============================
+pygame.quit()
+sys.exit()
